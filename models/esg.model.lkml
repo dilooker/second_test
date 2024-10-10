@@ -11,7 +11,7 @@ datagroup: esg_default_datagroup {
 persist_with: esg_default_datagroup
 
 explore: f_c_sale {
-  description: "경제-매출/영업이익"
+  view_label: "경제-매출/영업이익"
   join: d_bp_master {
     type: left_outer
     relationship: many_to_one

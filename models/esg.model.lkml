@@ -18,6 +18,7 @@ explore: f_c_sale {
     sql_on: ${d_bp_master.bp_cd} = ${f_c_sale.BP_CD} ;;
   }
   join: d_date {
+    view_label: "일자"
     type: left_outer
     sql_on: ${f_c_sale.YYYYMMDD} = ${d_date.yyyymmdd_id} ;;
     relationship: many_to_one

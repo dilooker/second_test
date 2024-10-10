@@ -17,6 +17,16 @@ explore: f_c_sale {
     relationship: many_to_one
     sql_on: ${d_bp_master.bp_cd} = ${f_c_sale.BP_CD} ;;
   }
+  join: d_date {
+    type: left_outer
+    sql_on: ${f_c_sale.YYYYMMDD} = ${d_date.yyyymmdd_id} ;;
+    relationship: many_to_one
+  }
+  # join: d_org {
+  #   type: left_outer
+  #   sql_on: ${f_c_sale.comp_cd} = ${d_org.org_cd} ;;
+  #   relationship: many_to_one
+  # }
 }
 
 # explore: f_e_energy_fir {}

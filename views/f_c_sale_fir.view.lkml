@@ -18,17 +18,19 @@ view: f_c_sale {
   }
   dimension: BP_CD {
     primary_key: yes
+    hidden: yes
     label: "사업장코드"
     type: string
     sql: ${TABLE}.BP_CD ;;
   }
   dimension: comp_cd {
+    hidden: yes
     label: "계열사코드"
     type: string
     sql: ${TABLE}.COMP_CD ;;
   }
   dimension: OPRTN_INCOME {
-    label: "영업이익"
+    hidden: yes
     type: number
     sql: ${TABLE}.OPRTN_INCOME ;;
   }
@@ -49,7 +51,7 @@ view: f_c_sale {
     sql: ${TABLE}.REG_ID ;;
   }
   dimension: REVENUE {
-    label: "매출액"
+    hidden: yes
     type: number
     sql: ${TABLE}.REVENUE ;;
   }
@@ -70,6 +72,7 @@ view: f_c_sale {
     sql: ${TABLE}.UP_ID ;;
   }
   dimension: YYYYMMDD {
+    hidden: yes
     label: "년월일"
     type: string
     sql: ${TABLE}.YYYYMMDD ;;
@@ -81,5 +84,15 @@ view: f_c_sale {
   }
   measure: count {
     type: count
+  }
+  measure: sum_revenue {
+    label: "매출액"
+    type: number
+    sql: sum(${TABLE}.REVENUE) ;;
+  }
+  measure: sum_OPRTN_INCOME {
+    label: "영업이익"
+    type: number
+    sql: sum(${TABLE}.OPRTN_INCOME) ;;
   }
 }

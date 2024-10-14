@@ -11,23 +11,27 @@ datagroup: esg_default_datagroup {
 persist_with: esg_default_datagroup
 
 explore: f_c_sale {
-  view_label: "경제-매출/영업이익"
+  label: "경제-매출/영업이익"
+  view_label: "F_경제-매출/영업이익"
   join: d_bp_master {
+    view_label: "D_사업장"
     type: left_outer
     relationship: many_to_one
     sql_on: ${d_bp_master.bp_cd} = ${f_c_sale.BP_CD} ;;
   }
   join: d_date {
-    view_label: "일자"
+    view_label: "D_연도"
+    fields: [year_id]
     type: left_outer
-    sql_on: ${f_c_sale.YYYYMMDD} = ${d_date.yyyymmdd_id} ;;
     relationship: many_to_one
+    sql_on: ${f_c_sale.YYYYMMDD} = ${d_date.yyyymmdd_id} ;;
   }
-  # join: d_org {
-  #   type: left_outer
-  #   sql_on: ${f_c_sale.comp_cd} = ${d_org.org_cd} ;;
-  #   relationship: many_to_one
-  # }
+  join: d_org {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_c_sale.comp_cd} = ${d_org.org_cd} ;;
+  }
 }
 
 # explore: f_e_energy_fir {}
@@ -38,9 +42,56 @@ explore: f_c_sale {
 
 # explore: f_e_energy_sec_g {}
 
-# explore: f_e_ghg_fir {}
+explore: f_e_ghg_fir {
+  label: "환경-온실가스"
+  view_label: "온실가스"
+  join: d_bp_master {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_fir.bp_cd} = ${d_bp_master.bp_cd} ;;
+  }
+  join: d_date {
+    view_label: "D_연도"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_fir.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
+  }
+  join: d_org {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_fir.comp_cd} = ${d_org.org_cd} ;;
+  }
+  join: f_e_ghg_fir_g {
+    view_label: "온실가스"
+    type: inner
+    relationship: one_to_one
+    sql_on: ${f_e_ghg_fir.new_pk} = ${f_e_ghg_fir_g.new_pk} ;;
+  }
+}
 
-# explore: f_e_ghg_fir_g {}
+# explore: f_e_ghg_fir_g {
+#   view_label: "F_환경-온실가스"
+#   join: d_bp_master {
+#     view_label: "D_사업장"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${f_e_ghg_fir_g.bp_cd} = ${d_bp_master.bp_cd} ;;
+#   }
+#   join: d_date {
+#     view_label: "D_일자"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${f_e_ghg_fir_g.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
+#   }
+#   join: d_org {
+#     view_label: "D_조직"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${f_e_ghg_fir_g.comp_cd} = ${d_org.org_cd} ;;
+#   }
+# }
 
 # explore: f_e_ghg_frth {}
 

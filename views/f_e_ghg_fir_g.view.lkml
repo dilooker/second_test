@@ -1,46 +1,46 @@
-view: d_bp_master {
-  sql_table_name: dbo.D_BP_MASTER ;;
+view: f_e_ghg_fir_g {
+  sql_table_name: dbo.F_E_GHG_FIR_G ;;
 
-  dimension: attr1 {
-    hidden: yes
+  dimension: abnormal_desc {
+    label: "목표 이상설명"
     type: string
-    sql: ${TABLE}.ATTR1 ;;
+    sql: ${TABLE}.ABNORMAL_DESC ;;
   }
-  dimension: attr2 {
+  dimension: abnormal_yn {
     hidden: yes
     type: string
-    sql: ${TABLE}.ATTR2 ;;
+    sql: ${TABLE}.ABNORMAL_YN ;;
   }
-  dimension: attr3 {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.ATTR3 ;;
+  dimension: abnormal {
+    label: "목표 이상여부"
+    type: yesno
+    sql: ${TABLE}.ABNORMAL_YN is not null ;;
   }
-  dimension: attr4 {
+  dimension: new_pk {
+    primary_key: yes
     hidden: yes
     type: string
-    sql: ${TABLE}.ATTR4 ;;
-  }
-  dimension: attr5 {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.ATTR5 ;;
-  }
-  dimension: attr6 {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.ATTR6 ;;
-  }
-  dimension: attr7 {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.ATTR7 ;;
+    sql: concat(${yyyymmdd},${comp_cd},${bp_cd},${ghg_cd} ;;
   }
   dimension: bp_cd {
-    label: "사업장코드"
-    primary_key: yes
+    hidden: yes
     type: string
     sql: ${TABLE}.BP_CD ;;
+  }
+  dimension: comp_cd {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.COMP_CD ;;
+  }
+  dimension: g_scope_dsc_amt {
+    label: "목표 온실가스 배출량"
+    type: number
+    sql: ${TABLE}.G_SCOPE_DSC_AMT ;;
+  }
+  dimension: ghg_cd {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.GHG_CD ;;
   }
   dimension: reg_comp_cd {
     hidden: yes
@@ -58,11 +58,6 @@ view: d_bp_master {
     type: string
     sql: ${TABLE}.REG_ID ;;
   }
-  dimension: region_cd {
-    label: "지역코드"
-    type: string
-    sql: ${TABLE}.REGION_CD ;;
-  }
   dimension: up_comp_cd {
     hidden: yes
     type: string
@@ -79,7 +74,13 @@ view: d_bp_master {
     type: string
     sql: ${TABLE}.UP_ID ;;
   }
+  dimension: yyyymmdd {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.YYYYMMDD ;;
+  }
   measure: count {
+    hidden: yes
     type: count
   }
 }

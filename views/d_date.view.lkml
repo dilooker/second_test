@@ -78,7 +78,7 @@ view: d_date {
     sql: ${TABLE}.WDAY_PARTC_NM ;;
   }
   dimension: year_id {
-    hidden: yes
+    label: "연도"
     type: string
     sql: ${TABLE}.YEAR_ID ;;
   }

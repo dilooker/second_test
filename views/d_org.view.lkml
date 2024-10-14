@@ -1,5 +1,5 @@
-view: d_bp_master {
-  sql_table_name: dbo.D_BP_MASTER ;;
+view: d_org {
+  sql_table_name: dbo.D_ORG ;;
 
   dimension: attr1 {
     hidden: yes
@@ -36,11 +36,27 @@ view: d_bp_master {
     type: string
     sql: ${TABLE}.ATTR7 ;;
   }
-  dimension: bp_cd {
-    label: "사업장코드"
-    primary_key: yes
+  dimension: bs_afltn_cd {
+    hidden: yes
     type: string
-    sql: ${TABLE}.BP_CD ;;
+    sql: ${TABLE}.BS_AFLTN_CD ;;
+  }
+  dimension: org_cd {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: ${TABLE}.ORG_CD ;;
+  }
+  dimension: org_nm {
+    view_label: "D_사업장"
+    label: "조직명"
+    type: string
+    sql: ${TABLE}.ORG_NM ;;
+  }
+  dimension: p_org_cd {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.P_ORG_CD ;;
   }
   dimension: reg_comp_cd {
     hidden: yes
@@ -58,10 +74,10 @@ view: d_bp_master {
     type: string
     sql: ${TABLE}.REG_ID ;;
   }
-  dimension: region_cd {
-    label: "지역코드"
+  dimension: seq {
+    hidden: yes
     type: string
-    sql: ${TABLE}.REGION_CD ;;
+    sql: ${TABLE}.SEQ ;;
   }
   dimension: up_comp_cd {
     hidden: yes
@@ -79,7 +95,13 @@ view: d_bp_master {
     type: string
     sql: ${TABLE}.UP_ID ;;
   }
+  dimension: use_yn {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.USE_YN ;;
+  }
   measure: count {
+    hidden: yes
     type: count
   }
 }

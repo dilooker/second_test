@@ -96,6 +96,7 @@ explore: f_e_ghg_fir {
 
 explore: f_e_ghg_frth {
   label: "환경-탄소배출권 시세"
+  view_label: "탄소배출권 시세"
   fields: [view_set*]
   join: d_date {
     view_label: "D_연도"
@@ -109,6 +110,7 @@ explore: f_e_ghg_frth {
 explore: f_e_ghg_thd {
   fields: [view_set*]
   label: "환경-탄소배출권"
+  view_label: "탄소배출권"
   join: d_bp_master {
     view_label: "D_사업장"
     type: left_outer

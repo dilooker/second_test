@@ -2,6 +2,9 @@ view: f_e_ghg_thd {
   sql_table_name: dbo.F_E_GHG_THD ;;
   set: view_set {
     fields: [
+      yyyymmdd,
+      comp_cd,
+      bp_cd,
       cer_s_cost,
       cer_s_amt,
       cer_quota,
@@ -28,6 +31,7 @@ view: f_e_ghg_thd {
   }
   dimension: bp_cd {
     primary_key: yes
+    hidden: yes
     type: string
     sql: ${TABLE}.BP_CD ;;
   }
@@ -57,6 +61,7 @@ view: f_e_ghg_thd {
     sql: ${TABLE}.CER_S_COST ;;
   }
   dimension: comp_cd {
+    hidden: yes
     type: string
     sql: ${TABLE}.COMP_CD ;;
   }
@@ -87,6 +92,7 @@ view: f_e_ghg_thd {
     sql: ${TABLE}.UP_ID ;;
   }
   dimension: yyyymmdd {
+    hidden: yes
     type: string
     sql: ${TABLE}.YYYYMMDD ;;
   }

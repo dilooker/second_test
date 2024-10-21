@@ -2,6 +2,8 @@ view: f_e_ghg_frth {
   sql_table_name: dbo.F_E_GHG_FRTH ;;
   set: view_set {
     fields: [
+      new_pk,
+      yyyymmdd,
       item,
       closing_price,
       compare,
@@ -17,6 +19,7 @@ view: f_e_ghg_frth {
 
   dimension: new_pk {
     primary_key: yes
+    hidden: yes
     type: string
     sql: ${TABLE}.YYYYMMDD+${TABLE}.item ;;
   }
@@ -97,6 +100,7 @@ view: f_e_ghg_frth {
     sql: ${TABLE}.WEIGHTED_AVG ;;
   }
   dimension: yyyymmdd {
+    hidden: yes
     type: string
     sql: ${TABLE}.YYYYMMDD ;;
   }

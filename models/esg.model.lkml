@@ -53,6 +53,7 @@ explore: f_e_ghg_fir {
   }
   join: d_date {
     view_label: "D_연도"
+    fields: [year_id]
     type: left_outer
     relationship: many_to_one
     sql_on: ${f_e_ghg_fir.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
@@ -93,11 +94,41 @@ explore: f_e_ghg_fir {
 #   }
 # }
 
-# explore: f_e_ghg_frth {}
+explore: f_e_ghg_frth {
+  label: "환경-탄소배출권 시세"
+  fields: [view_set*]
+  join: d_date {
+    view_label: "D_연도"
+    fields: [d_date.yyyymmdd_partc_dt]
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_frth.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
+  }
+}
 
-# explore: f_e_ghg_frth_0612 {}
-
-# explore: f_e_ghg_thd {}
+explore: f_e_ghg_thd {
+  fields: [view_set*]
+  label: "환경-탄소배출권"
+  join: d_bp_master {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${d_bp_master.bp_cd} = ${f_e_ghg_thd.bp_cd} ;;
+  }
+  join: d_date {
+    view_label: "D_연도"
+    fields: [year_id]
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_thd.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
+  }
+  join: d_org {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_ghg_thd.comp_cd} = ${d_org.org_cd} ;;
+  }
+}
 
 # explore: f_e_rnwmtrl_fir {}
 

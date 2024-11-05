@@ -66,28 +66,34 @@ view: f_e_ghg_thd {
     sql: ${TABLE}.COMP_CD ;;
   }
   dimension: reg_comp_cd {
+    hidden: yes
     type: string
     sql: ${TABLE}.REG_COMP_CD ;;
   }
   dimension_group: reg_dt {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.REG_DT ;;
   }
   dimension: reg_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.REG_ID ;;
   }
   dimension: up_comp_cd {
+    hidden: yes
     type: string
     sql: ${TABLE}.UP_COMP_CD ;;
   }
   dimension_group: up_dt {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.UP_DT ;;
   }
   dimension: up_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.UP_ID ;;
   }
@@ -97,6 +103,32 @@ view: f_e_ghg_thd {
     sql: ${TABLE}.YYYYMMDD ;;
   }
   measure: count {
+    hidden: yes
     type: count
+  }
+  measure: tot_cer_p_amt {
+    label: "탄소배출권 구매량 합계"
+    type: number
+    sql: sum(${TABLE}.CER_P_AMT) ;;
+  }
+  measure: tot_cer_p_cost {
+    label: "탄소배출권 구매비용 합계"
+    type: number
+    sql: sum(${TABLE}.CER_P_COST) ;;
+  }
+  measure: tot_cer_quota {
+    label: "탄소배출권 할당량 합계"
+    type: number
+    sql: sum(${TABLE}.CER_QUOTA) ;;
+  }
+  measure: tot_cer_s_amt {
+    label: "탄소배출권 판매량 합계"
+    type: number
+    sql: sum(${TABLE}.CER_S_AMT) ;;
+  }
+  measure: tot_cer_s_cost {
+    label: "탄소배출권 판매비용 합계"
+    type: number
+    sql: sum(${TABLE}.CER_S_COST) ;;
   }
 }

@@ -1,5 +1,6 @@
 view: d_date {
   sql_table_name: dbo.D_DATE ;;
+  # fields_hidden_by_default: yes
 
   dimension: dd_id {
     hidden: yes

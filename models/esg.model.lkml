@@ -34,7 +34,41 @@ explore: f_c_sale {
   }
 }
 
-# explore: f_e_energy_fir {}
+explore: f_e_energy_fir {
+  label: "환경-에너지"
+  view_label: "에너지"
+  fields: [f_e_energy_fir.engcs_cd,
+          f_e_energy_fir.eng_amt, f_e_energy_fir.s_eng_amt,
+          d_date.year_id,
+          f_e_energy_fir_g*,
+          d_org*,
+          d_bp_master*]
+  join: d_bp_master {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_energy_fir.bp_cd} = ${d_bp_master.bp_cd} ;;
+  }
+  join: d_date {
+    view_label: "D_연도"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_energy_fir.yyyymmdd} = ${d_date.yyyymmdd_id} ;;
+  }
+  join: d_org {
+    view_label: "D_사업장"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${f_e_energy_fir.comp_cd} = ${d_org.org_cd} ;;
+  }
+  join: f_e_energy_fir_g {
+    view_label: "에너지"
+    fields: [g_eng_amt, s_g_eng_amt]
+    type: inner
+    relationship: one_to_one
+    sql_on: ${f_e_energy_fir.new_pk} = ${f_e_energy_fir_g.new_pk} ;;
+  }
+}
 
 # explore: f_e_energy_fir_g {}
 
@@ -97,9 +131,9 @@ explore: f_e_ghg_fir {
 explore: f_e_ghg_frth {
   label: "환경-탄소배출권 시세"
   view_label: "탄소배출권 시세"
-  fields: [view_set*]
+  # fields: [view_set*]
   join: d_date {
-    view_label: "D_연도"
+    view_label: "D_일자"
     fields: [d_date.yyyymmdd_partc_dt]
     type: left_outer
     relationship: many_to_one
@@ -108,7 +142,7 @@ explore: f_e_ghg_frth {
 }
 
 explore: f_e_ghg_thd {
-  fields: [view_set*]
+  # fields: [view_set*]
   label: "환경-탄소배출권"
   view_label: "탄소배출권"
   join: d_bp_master {
